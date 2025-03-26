@@ -312,7 +312,7 @@
         <div class="viewer-container">
             <div class="viewer-counter">
                 <i class="fas fa-users"></i>
-                <span id="viewCount">269</span> viewers
+                <span id="viewCount">200</span> viewers
             </div>
             <a href="https://alqulol.xyz" target="_blank" class="info-link">
                 <div class="info-icon" title="Komaak@alqulol.xyz">
@@ -403,11 +403,8 @@
                 player.playVideo();
                 isPlaying = true;
                 
-                // Check if user has visited before using IP-based tracking
-                if (!localStorage.getItem('hasVisited')) {
-                    incrementViewCount();
-                    localStorage.setItem('hasVisited', 'true');
-                }
+                // Update view count
+                updateViewCount();
             }, 500);
         }
         
@@ -435,26 +432,38 @@
             }
         });
         
-        // IP-based view counter (simulated with localStorage)
-        function incrementViewCount() {
-            // In a real implementation, you would use a server-side API to track unique IPs
-            // This is a simulation using localStorage
-            const baseCount = 269;
-            let storedCount = localStorage.getItem('viewCount');
-            let currentCount = storedCount ? parseInt(storedCount) : baseCount;
+        // Improved view counter using localStorage and sessionStorage
+        function updateViewCount() {
+            const baseCount = 292;
+            let totalCount = localStorage.getItem('totalViewCount') || baseCount;
+            let sessionCount = sessionStorage.getItem('hasCounted');
             
-            // Only increment if this is the first visit from this device
-            if (!localStorage.getItem('hasVisited')) {
-                currentCount++;
-                localStorage.setItem('viewCount', currentCount);
-                viewCountElement.textContent = currentCount;
-            } else {
-                viewCountElement.textContent = currentCount;
+            // Only increment if this is the first time in this session
+            if (!sessionCount) {
+                totalCount++;
+                localStorage.setItem('totalViewCount', totalCount);
+                sessionStorage.setItem('hasCounted', 'true');
+            }
+            
+            // Display the count with animation
+            animateCounter(parseInt(viewCountElement.textContent), totalCount);
+        }
+        
+        // Animate the counter from current value to new value
+        function animateCounter(current, target) {
+            if (current < target) {
+                viewCountElement.textContent = current + 1;
+                setTimeout(() => {
+                    animateCounter(current + 1, target);
+                }, 50);
             }
         }
         
-        // Initialize with base count
-        viewCountElement.textContent = localStorage.getItem('viewCount') || 269;
+        // Initialize counter on page load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedCount = localStorage.getItem('totalViewCount') || 200;
+            viewCountElement.textContent = savedCount;
+        });
         
         // Load YouTube IFrame API asynchronously
         const tag = document.createElement('script');
