@@ -227,8 +227,6 @@
             backdrop-filter: blur(15px);
         }
         
-        
-        
         .welcome-overlay h1 {
             font-size: 2.5rem;
             color: #0066d4;
@@ -285,7 +283,7 @@
         }
     </style>
 </head>
- <body>
+<body>
     <!-- Fully Blurred Welcome Overlay -->
     <div class="welcome-overlay" id="welcomeOverlay">
         <div class="welcome-content">
@@ -303,6 +301,9 @@
         </div>
     </div>
 
+    <!-- YouTube Player (Hidden) -->
+    <div id="player" style="display: none;"></div>
+
     <!-- Profile Content -->
     <div class="profile-container">
         <img src="avatar.gif" alt="Mullah Omar" class="avatar">
@@ -314,25 +315,20 @@
                 <span id="viewCount">269</span> viewers
             </div>
             <a href="https://alqulol.xyz" target="_blank" class="info-link">
-
                 <div class="info-icon" title="Komaak@alqulol.xyz">
                     <i class="fas fa-info"></i>
                 </div>
             </a>
             <a href="https://discord.gg/8MJn2fuv3h" target="_blank" class="info-link">
-
-            <div class="info-icon" title="Discord Server">
-                <i class="fa fa-globe"></i>
-            </div>
-        </a>
-        <a href="https://skcorp.mysellauth.com/" target="_blank" class="info-link">
-
-            <div class="info-icon" title="SK-Corp">
-                <i class="fas fa-dollar-sign"></i>
-            </div>
-        </a>
-       
-
+                <div class="info-icon" title="Discord Server">
+                    <i class="fa fa-globe"></i>
+                </div>
+            </a>
+            <a href="https://skcorp.mysellauth.com/" target="_blank" class="info-link">
+                <div class="info-icon" title="SK-Corp">
+                    <i class="fas fa-dollar-sign"></i>
+                </div>
+            </a>
         </div>
     </div>
 
@@ -341,16 +337,10 @@
         Bro it is AlQulol hahahahahahhahaha !!!! - 2025                                                                                        dar bigi 
     </footer>
 
-    <!-- Audio Element -->
-    <audio id="bgMusic" loop>
-        <source src="music.mp3" type="audio/mpeg">
-        Your browser does not support the audio element.
-    </audio>
-
+    <!-- YouTube IFrame API -->
     <script>
         // Welcome overlay
         const welcomeOverlay = document.getElementById('welcomeOverlay');
-        const bgMusic = document.getElementById('bgMusic');
         const soundBtn = document.getElementById('soundBtn');
         const volumeControl = document.getElementById('volumeControl');
         const audioControls = document.querySelector('.audio-controls');
@@ -359,13 +349,59 @@
         // Hide audio controls initially
         audioControls.style.display = 'none';
         
+        // YouTube player variables
+        let player;
+        let isPlaying = false;
+        
+        // Load YouTube IFrame API
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('player', {
+                height: '0',
+                width: '0',
+                videoId: 'rCOergSuReU',
+                playerVars: {
+                    'autoplay': 0,
+                    'controls': 0,
+                    'disablekb': 1,
+                    'fs': 0,
+                    'loop': 1,
+                    'modestbranding': 1,
+                    'playsinline': 1,
+                    'rel': 0
+                },
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+        
+        function onPlayerReady(event) {
+            // Player is ready, set initial volume
+            event.target.setVolume(volumeControl.value * 100);
+        }
+        
+        function onPlayerStateChange(event) {
+            // Update play/pause button based on player state
+            if (event.data === YT.PlayerState.PLAYING) {
+                isPlaying = true;
+                soundBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+            } else if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+                isPlaying = false;
+                soundBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            }
+        }
+        
         // Click to enter
         function enterSite() {
             welcomeOverlay.style.opacity = '0';
             setTimeout(() => {
                 welcomeOverlay.style.display = 'none';
                 audioControls.style.display = 'flex';
-                bgMusic.play();
+                
+                // Start playing YouTube video
+                player.playVideo();
+                isPlaying = true;
                 
                 // Check if user has visited before using IP-based tracking
                 if (!localStorage.getItem('hasVisited')) {
@@ -378,26 +414,23 @@
         welcomeOverlay.addEventListener('click', enterSite);
         
         // Set initial volume
-        bgMusic.volume = volumeControl.value;
+        volumeControl.addEventListener('input', () => {
+            player.setVolume(volumeControl.value * 100);
+            if (volumeControl.value === '0') {
+                soundBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
+            } else {
+                soundBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
+            }
+        });
         
         // Toggle sound
         soundBtn.addEventListener('click', (e) => {
             e.stopPropagation(); // Prevent triggering enterSite
-            if (bgMusic.paused) {
-                bgMusic.play();
-                soundBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
-            } else {
-                bgMusic.pause();
-                soundBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
-            }
-        });
-        
-        // Volume control
-        volumeControl.addEventListener('input', () => {
-            bgMusic.volume = volumeControl.value;
-            if (bgMusic.volume === 0) {
+            if (isPlaying) {
+                player.pauseVideo();
                 soundBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
             } else {
+                player.playVideo();
                 soundBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
             }
         });
@@ -422,6 +455,12 @@
         
         // Initialize with base count
         viewCountElement.textContent = localStorage.getItem('viewCount') || 269;
+        
+        // Load YouTube IFrame API asynchronously
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
     </script>
 </body>
 </html>
