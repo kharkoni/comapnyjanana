@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>lighter</title>
+    <title>Al Lighter</title>
     <link rel="icon" type="image/x-icon" href="icon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -238,6 +238,7 @@
             font-size: 1.2rem;
             color: #ccc;
             margin-bottom: 2rem;
+            text-align: center;
         }
         
         .enter-btn {
@@ -287,6 +288,7 @@
     <!-- Fully Blurred Welcome Overlay -->
     <div class="welcome-overlay" id="welcomeOverlay">
         <div class="welcome-content">
+            <h1>Welcome</h1>
             <p>Click anywhere to enter</p>
         </div>
     </div>
@@ -302,42 +304,41 @@
     </div>
 
     <!-- YouTube Player (Hidden) -->
-    <div id="player" style="display: none;"></div>
+    <div id="player"></div>
 
-    <!-- Profile Content -->
-    <div class="profile-container">
-        <img src="avatar.gif" alt="Mullah Omar" class="avatar">
-        <h1 class="username">Mullah Mohammed Omar <br><span>lighter-roshan</span></h1>
-        <p class="bio">Qasd giriftan asaan ooo bachaee nafaam </p>
-        <div class="viewer-container">
-            <div class="viewer-counter">
-                <i class="fas fa-users"></i>
-                <span id="viewCount">200</span> viewers
-            </div>
-            <a href="https://alqulol.xyz" target="_blank" class="info-link">
-                <div class="info-icon" title="Komaak@alqulol.xyz">
-                    <i class="fas fa-info"></i>
-                </div>
-            </a>
-            <a href="https://discord.gg/8MJn2fuv3h" target="_blank" class="info-link">
-                <div class="info-icon" title="Discord Server">
-                    <i class="fa fa-globe"></i>
-                </div>
-            </a>
-            <a href="https://skcorp.mysellauth.com/" target="_blank" class="info-link">
-                <div class="info-icon" title="SK-Corp">
-                    <i class="fas fa-dollar-sign"></i>
-                </div>
-            </a>
+<!-- Profile Content -->
+<div class="profile-container">
+    <img src="avatar.gif" alt="Civi" class="avatar">
+    <h1 class="username">Mullah Omar<br><span>Lighter</span></h1>
+    <p class="bio">Don't trust anyone here</p>
+    <div class="viewer-container" style="display: flex; justify-content: center; align-items: center;">
+        <div class="viewer-counter">
+            <i class="fa-solid fa-eye"></i>
+            <span id="viewCount">..</span>
         </div>
+        <a href="https://alqulol.xyz" target="_blank" class="info-link">
+            <div class="info-icon" title="Komaak@alqulol.xyz">
+                <i class="fas fa-info"></i>
+            </div>
+        </a>
+        <a href="https://discord.gg/bpMNW2vUFD" target="_blank" class="info-link">
+            <div class="info-icon" title="Discord Server">
+                <i class="fa fa-globe"></i>
+            </div>
+        </a>
+        <a href="https://skcorp.mysellauth.com/" target="_blank" class="info-link">
+            <div class="info-icon" title="SK-Corp">
+                <i class="fas fa-dollar-sign"></i>
+            </div>
+        </a>
     </div>
+</div>
 
     <!-- Footer -->
     <footer>
         Bro it is AlQulol hahahahahahhahaha !!!! - 2025                                                                                        dar bigi 
     </footer>
 
-    <!-- YouTube IFrame API -->
     <script>
         // Welcome overlay
         const welcomeOverlay = document.getElementById('welcomeOverlay');
@@ -358,9 +359,9 @@
             player = new YT.Player('player', {
                 height: '0',
                 width: '0',
-                videoId: 'rCOergSuReU',
+                videoId: 'mMFXtPET3S8',  // Your requested song
                 playerVars: {
-                    'autoplay': 0,
+                    'autoplay': 1,
                     'controls': 0,
                     'disablekb': 1,
                     'fs': 0,
@@ -377,12 +378,11 @@
         }
         
         function onPlayerReady(event) {
-            // Player is ready, set initial volume
             event.target.setVolume(volumeControl.value * 100);
+            event.target.playVideo();
         }
         
         function onPlayerStateChange(event) {
-            // Update play/pause button based on player state
             if (event.data === YT.PlayerState.PLAYING) {
                 isPlaying = true;
                 soundBtn.innerHTML = '<i class="fas fa-volume-up"></i>';
@@ -392,27 +392,74 @@
             }
         }
         
-        // Click to enter
+        // IP-based view counter using a free API
+        async function getViewerCount() {
+            try {
+                // Get visitor's IP address
+                const ipResponse = await fetch('https://api.ipify.org?format=json');
+                const ipData = await ipResponse.json();
+                const userIP = ipData.ip;
+                
+                // Check if this IP has visited before (using localStorage as fallback)
+                const visitedIPs = JSON.parse(localStorage.getItem('visitedIPs') || '[]');
+                
+                if (!visitedIPs.includes(userIP)) {
+                    visitedIPs.push(userIP);
+                    localStorage.setItem('visitedIPs', JSON.stringify(visitedIPs));
+                    
+                    // Update view count (stored in localStorage)
+                    let currentCount = parseInt(localStorage.getItem('viewCount') || '269');
+                    currentCount++;
+                    localStorage.setItem('viewCount', currentCount);
+                    viewCountElement.textContent = currentCount;
+                } else {
+                    // Show existing count
+                    viewCountElement.textContent = localStorage.getItem('viewCount') || '269';
+                }
+            } catch (error) {
+                console.error("Error tracking views:", error);
+                // Fallback to simple localStorage counter if IP API fails
+                let currentCount = parseInt(localStorage.getItem('viewCount') || '269');
+                if (!localStorage.getItem('hasVisited')) {
+                    currentCount++;
+                    localStorage.setItem('viewCount', currentCount);
+                    localStorage.setItem('hasVisited', 'true');
+                }
+                viewCountElement.textContent = currentCount;
+            }
+        }
+        
+        // Click to enter function
         function enterSite() {
             welcomeOverlay.style.opacity = '0';
             setTimeout(() => {
                 welcomeOverlay.style.display = 'none';
                 audioControls.style.display = 'flex';
                 
-                // Start playing YouTube video
-                player.playVideo();
-                isPlaying = true;
+                if (player && player.playVideo) {
+                    player.playVideo();
+                    isPlaying = true;
+                }
                 
-                // Update view count
-                updateViewCount();
+                // Initialize view counter
+                getViewerCount();
             }, 500);
         }
         
+        // Add click event to the entire overlay
         welcomeOverlay.addEventListener('click', enterSite);
         
-        // Set initial volume
+        // Also add to the welcome content in case event propagation is stopped
+        document.querySelector('.welcome-content').addEventListener('click', function(e) {
+            e.stopPropagation();
+            enterSite();
+        });
+        
+        // Volume control
         volumeControl.addEventListener('input', () => {
-            player.setVolume(volumeControl.value * 100);
+            if (player && player.setVolume) {
+                player.setVolume(volumeControl.value * 100);
+            }
             if (volumeControl.value === '0') {
                 soundBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
             } else {
@@ -422,7 +469,9 @@
         
         // Toggle sound
         soundBtn.addEventListener('click', (e) => {
-            e.stopPropagation(); // Prevent triggering enterSite
+            e.stopPropagation();
+            if (!player) return;
+            
             if (isPlaying) {
                 player.pauseVideo();
                 soundBtn.innerHTML = '<i class="fas fa-volume-mute"></i>';
@@ -432,40 +481,7 @@
             }
         });
         
-        // Improved view counter using localStorage and sessionStorage
-        function updateViewCount() {
-            const baseCount = 292;
-            let totalCount = localStorage.getItem('totalViewCount') || baseCount;
-            let sessionCount = sessionStorage.getItem('hasCounted');
-            
-            // Only increment if this is the first time in this session
-            if (!sessionCount) {
-                totalCount++;
-                localStorage.setItem('totalViewCount', totalCount);
-                sessionStorage.setItem('hasCounted', 'true');
-            }
-            
-            // Display the count with animation
-            animateCounter(parseInt(viewCountElement.textContent), totalCount);
-        }
-        
-        // Animate the counter from current value to new value
-        function animateCounter(current, target) {
-            if (current < target) {
-                viewCountElement.textContent = current + 1;
-                setTimeout(() => {
-                    animateCounter(current + 1, target);
-                }, 50);
-            }
-        }
-        
-        // Initialize counter on page load
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedCount = localStorage.getItem('totalViewCount') || 200;
-            viewCountElement.textContent = savedCount;
-        });
-        
-        // Load YouTube IFrame API asynchronously
+        // Load YouTube IFrame API
         const tag = document.createElement('script');
         tag.src = "https://www.youtube.com/iframe_api";
         const firstScriptTag = document.getElementsByTagName('script')[0];
