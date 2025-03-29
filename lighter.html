@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Al Lighter</title>
+    <title>Al Haji</title>
     <link rel="icon" type="image/x-icon" href="icon.ico">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
@@ -24,7 +24,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            background-image: url('background.gif');
+            background-image: url('backround12.gif');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
@@ -50,11 +50,11 @@
             padding: 2rem;
             background-color: rgba(0, 0, 0, 0.3);
             border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 102, 212, 0.5);
+            box-shadow: 0 0 20px rgba(164, 206, 252, 0.5);
             max-width: 500px;
             width: 90%;
             backdrop-filter: blur(5px);
-            border: 1px solid rgba(0, 102, 212, 0.3);
+            border: 1px solid rgba(164, 206, 252, 0.5);
             animation: fadeIn 0.8s ease-in-out;
             margin: 2rem 0;
         }
@@ -308,9 +308,9 @@
 
 <!-- Profile Content -->
 <div class="profile-container">
-    <img src="avatar.gif" alt="Civi" class="avatar">
-    <h1 class="username">Mullah Omar<br><span>Lighter</span></h1>
-    <p class="bio">Qaasd giriftan asan ast lala Ghr Ghr Ghr </p>
+    <img src="avatar12.png" alt="Civi" class="avatar">
+    <h1 class="username">Nabi Omari<br><span>Haji</span></h1>
+    <p class="bio">Never give up push only  haha Ghr Ghr Ghr</p>
     <div class="viewer-container" style="display: flex; justify-content: center; align-items: center;">
         <div class="viewer-counter">
             <i class="fa-solid fa-eye"></i>
@@ -359,7 +359,7 @@
             player = new YT.Player('player', {
                 height: '0',
                 width: '0',
-                videoId: 'cGYr_WHuLcs',  // Your requested song
+                videoId: 'P5-x90oSsGw',  // Your requested song
                 playerVars: {
                     'autoplay': 1,
                     'controls': 0,
@@ -408,18 +408,18 @@
                     localStorage.setItem('visitedIPs', JSON.stringify(visitedIPs));
                     
                     // Update view count (stored in localStorage)
-                    let currentCount = parseInt(localStorage.getItem('viewCount') || '269');
+                    let currentCount = parseInt(localStorage.getItem('viewCount') || '95');
                     currentCount++;
                     localStorage.setItem('viewCount', currentCount);
                     viewCountElement.textContent = currentCount;
                 } else {
                     // Show existing count
-                    viewCountElement.textContent = localStorage.getItem('viewCount') || '269';
+                    viewCountElement.textContent = localStorage.getItem('viewCount') || '95';
                 }
             } catch (error) {
                 console.error("Error tracking views:", error);
                 // Fallback to simple localStorage counter if IP API fails
-                let currentCount = parseInt(localStorage.getItem('viewCount') || '269');
+                let currentCount = parseInt(localStorage.getItem('viewCount') || '95');
                 if (!localStorage.getItem('hasVisited')) {
                     currentCount++;
                     localStorage.setItem('viewCount', currentCount);
