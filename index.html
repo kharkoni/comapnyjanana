@@ -6,7 +6,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">
     <link rel="stylesheet" href="style1.css">
     <title>Talibaan - 2025</title>
-    <link rel="icon" type="image/x-icon" href="icon.ico">
+    <link rel="icon" type="image/x-icon" href="assets/img/icon.ico">
 
     <style>
         .logo {
@@ -89,6 +89,13 @@
             border-radius: 10px;
             text-align: center;
             box-shadow: 0 0 10px rgba(0, 102, 212, 0.5);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+        .member-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(0, 102, 212, 0.8);
+            z-index: 10;
         }
         .member-card img {
             width: 100px;
@@ -96,9 +103,19 @@
             border-radius: 50%;
             object-fit: cover;
             margin-bottom: 1rem;
+            transition: all 0.3s ease;
+        }
+        .member-card:hover img {
+            transform: scale(1.1);
         }
         .member-card h3, .member-card p {
             font-size: 1.6rem;
+        }
+        .member-link {
+            color: white;
+            display: block;
+            width: 100%;
+            height: 100%;
         }
     </style>
 </head>
@@ -114,13 +131,8 @@
     <nav>
         <a href="#home" id="home-link" class="active">Home</a>
         <a href="#members" id="members-link">Members</a>    
-        <a href="./lighter" >Contact</a> 
-        <a href="./qari">
-                    <a href="./barcha">
-        <a href="./haji">
-          <a href="./reaper">
+        <a href="https://discord.gg/7tMXdJPTe8">Contact</a> 
         <a href="https://nohello.net/en/" class="">About and Bypass </a>
-        
 
     </nav>
 </header>
@@ -128,125 +140,155 @@
 <section class="home" id="home">
     <div class="home-img">
         <img src="main.jpg" alt="">
-
-
-
-        
     </div>
     <div class="home-content">
         <h1>Hi, It's <span>Al Qulol</span></h1>
         <h3 class="typing-text">We are  <span></span></h3>
         <p>Lala Kati Ma Khoda Nazan Ki Gooit Baaz Mera Jigaar </p>
         <div class="social-icons">
-            <a href="https://discord.gg/9jhRY9qKcY"><i   class="fa-brands fa-discord"></i></a>
+            <a href="https://discord.gg/7tMXdJPTe8"><i   class="fa-brands fa-discord"></i></a>
             <a href="https://cdn.discordapp.com/attachments/1335056246239137812/1342650133593980968/IMG_1245.jpg?ex=67c4f3e1&is=67c3a261&hm=e191fb427c846dd4fdfcb31b5c8d036b6c74ee5520f738663f369268f4ed3c7c&"><i class="fa-brands fa-youtube"></i></a>
             <a href="https://cdn.discordapp.com/attachments/1335056246239137812/1342650133593980968/IMG_1245.jpg?ex=67c4f3e1&is=67c3a261&hm=e191fb427c846dd4fdfcb31b5c8d036b6c74ee5520f738663f369268f4ed3c7c&"><i class="fa-brands fa-tiktok"></i></a>
             <a href="https://cdn.discordapp.com/attachments/1335056246239137812/1342650133593980968/IMG_1245.jpg?ex=67c4f3e1&is=67c3a261&hm=e191fb427c846dd4fdfcb31b5c8d036b6c74ee5520f738663f369268f4ed3c7c&"><i class="fa-brands fa-instagram"></i></a>
         </div>
-        <a href="https://discord.gg/9jhRY9qKcY" target="_blank"                                 class="btn">Join our Team </a>
+        <a href="https://discord.gg/9jhRY9qKcY" target="_blank" class="btn">Join our Team </a>
     </div>
 </section>
 
 <section id="members" class="members">
     <h2>Members</h2>
     <div class="members-container">
-     
-
-        <div class="member-card">
-            <img src="kroon.png" alt="Logo">            <h3>Raees</h3>
-            <p> Alqulol not accepting (Raees) </p>  
-            <p> dont try !! </p>
-        </div>
-        <div class="member-card">
-            <img src="lighter.png" alt="Logo">            <h3>Mullah Mohammad Omar</h3>
-            <p>Lighter </p>
-        </div>
-  
-
-        <div class="member-card">
-            <img src="alcigaar.png" alt="Logo">            <h3>Mullah Baradar</h3>
-            <p> Qari </p>
-        </div>
+        <a href="https://www.youtube.com/shorts/mJP1jwhTm98" target="_blank" class="member-link">
+            <div class="member-card">
+                <img src="kroon.png" alt="Raees">
+                <h3>Raees</h3>
+                <p> Alqulol not accepting (Raees) </p>  
+            </div>
+        </a>
         
-        <div class="member-card">
-            <img src="tofan.png" alt="Logo">            <h3>Mullah Yaqoob</h3>
-            <p>Tofan </p>
-        </div>
-        <div class="member-card">
-            <img src="satad.png" alt="Logo">            <h3>Hibatullah Akhundzada</h3>
-            <p>Satad </p>
-        </div>
-        <div class="member-card">
-            <img src="qari.png" alt="Logo">            <h3>Dadullah</h3>
-            <p>ᴬᴸ Ꮢᴇᴀᴘᴇʀ  </p>
-            
-        </div>
+        <a href="https://alqulol.xyz/lighter" class="member-link">
+            <div class="member-card">
+                <img src="lighter.png" alt="Lighter">
+                <h3>Mullah Mohammad Omar</h3>
+                <p>Lighter </p>
+            </div>
+        </a>
+
+        <a href="https://alqulol.xyz/qari" class="member-link">
+            <div class="member-card">
+                <img src="alcigaar.png" alt="Qari">
+                <h3>Mullah Baradar</h3>
+                <p> Qari </p>
+            </div>
+        </a>
         
+        <a href="https://nohello.net/en/" class="member-link">
+            <div class="member-card">
+                <img src="tofan.png" alt="Tofan">
+                <h3>Mullah Yaqoob</h3>
+                <p>Tofan </p>
+            </div>
+        </a>
         
-        <div class="member-card">
-            <img src="gold.png" alt="Logo">            <h3>Akhtar Mansour</h3>
-            <p>Gold </p>
-        </div>
+        <a href="https://nohello.net/en/" class="member-link">
+            <div class="member-card">
+                <img src="satad.png" alt="Satad">
+                <h3>Hibatullah Akhundzada</h3>
+                <p>Satad </p>
+            </div>
+        </a>
         
-        <div class="member-card">
-            <img src="barcha.png" alt="Logo">            <h3>Wakil Ahmed Muttawakil</h3>
-            <p>Barcha </p>
-        </div>
+        <a href="https://alqulol.xyz/reaper" class="member-link">
+            <div class="member-card">
+                <img src="qari.png" alt="Reaper">
+                <h3>Dadullah</h3>
+                <p>ᴬᴸ Ꮢᴇᴀᴘᴇʀ  </p>
+            </div>
+        </a>
         
-        <div class="member-card">
-            <img src="shiraz.png" alt="Logo">            <h3>Mohammad Nabi Omari</h3>
-            <p>Shiraz </p>
-        </div>
+        <a href="https://nohello.net/en/" class="member-link">
+            <div class="member-card">
+                <img src="gold.png" alt="Gold">
+                <h3>Akhtar Mansour</h3>
+                <p>Gold </p>
+            </div>
+        </a>
+        
+        <a href="https://alqulol.xyz/barcha" class="member-link">
+            <div class="member-card">
+                <img src="barcha.png" alt="Barcha">
+                <h3>Wakil Ahmed Muttawakil</h3>
+                <p>Barcha </p>
+            </div>
+        </a>
+        
+        <a href="https://alqulol.xyz/haji" class="member-link">
+            <div class="member-card">
+                <img src="shiraz.png" alt="Shiraz">
+                <h3>Mohammad Nabi Omari</h3>
+                <p>Shiraz </p>
+            </div>
+        </a>
 
-        <div class="member-card">
-            <img src="ooqaab.png" alt="Logo">            <h3>Nooruddin Turabi</h3>
-            <p>Oqaab </p>
-        </div>
-        <div class="member-card">
-            <img src="taliban_soldier.png" alt="Logo">            <h3>Red Unit </h3>
-            <p> Kabuli </p>
-        </div>
-        <div class="member-card">
-            <img src="taliban_soldier.png" alt="Logo">            <h3>Red Unit</h3>
-            <p> Linux </p>
-        </div>
+        <a href="https://nohello.net/en/" class="member-link">
+            <div class="member-card">
+                <img src="ooqaab.png" alt="Oqaab">
+                <h3>Nooruddin Turabi</h3>
+                <p>Oqaab </p>
+            </div>
+        </a>
+        
+        <a href="https://nohello.net/en/" class="member-link">
+            <div class="member-card">
+                <img src="taliban_soldier.png" alt="Kabuli">
+                <h3>Red Unit </h3>
+                <p> Kabuli </p>
+            </div>
+        </a>
+        
+        <a href="https://nohello.net/en/" class="member-link">
+            <div class="member-card">
+                <img src="taliban_soldier.png" alt="Linux">
+                <h3>Red Unit</h3>
+                <p> Linux </p>
+            </div>
+        </a>
 
-        <div class="member-card">
-            <img src="taliban_soldier.png" alt="Logo">            <h3>Red Unit </h3>
-            <p> Milaad </p>
-        </div>
+        <a href="https://nohello.net/en/" class="member-link">
+            <div class="member-card">
+                <img src="taliban_soldier.png" alt="Milaad">
+                <h3>Red Unit </h3>
+                <p> Milaad </p>
+            </div>
+        </a>
 
-        <div class="member-card">
-            <img src="taliban_soldier.png" alt="Logo">            <h3>Red Unit </h3>
-            <p> Sshil </p>
-        </div>
-
-
-        <div class="member-card">
-            <img src="taliban_soldier.png" alt="Logo">            <h3>Red Unit </h3>
-            <p> X1 </p>
-        </div>
-
-        <div class="member-card">
-            <img src="taliban_soldier.png" alt="Logo">            <h3>Red Unit </h3>
-            <p> Baba </p>
-        </div>
-
-
-
-       
-        <div class="member-card">
-            <img src="taliban_soldier.png" alt="Logo">            <h3>Red Unit </h3>
-            <p> Lucifer </p>
-        </div>
+        <a href="https://nohello.net/en/" class="member-link">
+            <div class="member-card">
+                <img src="taliban_soldier.png" alt="Sshil">
+                <h3>Red Unit </h3>
+                <p> Sshil </p>
+            </div>
+        </a>
 
 
 
+        <a href="https://nohello.net/en/" class="member-link">
+            <div class="member-card">
+                <img src="taliban_soldier.png" alt="Baba">
+                <h3>Red Unit </h3>
+                <p> Baba </p>
+            </div>
+        </a>
 
-
+        <a href="https://nohello.net/en/" class="member-link">
+            <div class="member-card">
+                <img src="taliban_soldier.png" alt="Lucifer">
+                <h3>Red Unit </h3>
+                <p> Lucifer </p>
+            </div>
+        </a>
     </div>
 </section>
-
 
 <script>
     // Handle active class change when clicking on navigation links
