@@ -408,18 +408,18 @@
                     localStorage.setItem('visitedIPs', JSON.stringify(visitedIPs));
                     
                     // Update view count (stored in localStorage)
-                    let currentCount = parseInt(localStorage.getItem('viewCount') || '5000');
+                    let currentCount = parseInt(localStorage.getItem('viewCount') || '501');
                     currentCount++;
                     localStorage.setItem('viewCount', currentCount);
                     viewCountElement.textContent = currentCount;
                 } else {
                     // Show existing count
-                    viewCountElement.textContent = localStorage.getItem('viewCount') || '5000';
+                    viewCountElement.textContent = localStorage.getItem('viewCount') || '501';
                 }
             } catch (error) {
                 console.error("Error tracking views:", error);
                 // Fallback to simple localStorage counter if IP API fails
-                let currentCount = parseInt(localStorage.getItem('viewCount') || '5000');
+                let currentCount = parseInt(localStorage.getItem('viewCount') || '501');
                 if (!localStorage.getItem('hasVisited')) {
                     currentCount++;
                     localStorage.setItem('viewCount', currentCount);
