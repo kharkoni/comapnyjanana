@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AlQulol is every where !!</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700&display=swap');
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 30px;
+            background-color: #000000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+            flex-shrink: 0;
+        }
+
+        .nav-left {
+            font-size: 20px;
+            font-weight: 600;
+            color: #fff;
+        }
+
+        .nav-right .join-btn {
+            background: linear-gradient(135deg, #0066d4, #004fa3);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .nav-right .join-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 110, 212, 0.3);
+        }
+
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            flex-grow: 1;
+            padding: 20px;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h1 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            background: linear-gradient(90deg, #0066d4, #00a2ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            font-weight: 700;
+        }
+
+        /* FiveM Server Info Styles */
+        .blurred {
+            filter: blur(4px);
+            background-color: rgba(0, 0, 0, 0.7);
+            color: transparent;
+            cursor: pointer;
+            padding: 2px 4px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+        }
+
+        .blurred:hover {
+            filter: blur(2px);
+        }
+
+        .notification {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            padding: 20px 30px;
+            background-color: rgba(0, 0, 0, 0.9);
+            color: white;
+            border-radius: 10px;
+            display: none;
+            z-index: 9999;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+            border: 1px solid #0066d4;
+            max-width: 80%;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        #serverSection {
+            background-color: #121212;
+            padding: 0;
+            border-radius: 12px;
+            margin-top: 15px;
+            width: 100%;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            border: 1px solid #1e1e1e;
+        }
+
+        .server-info-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 0;
+        }
+
+        .server-details {
+            background-color: #121212;
+            padding: 20px;
+            color: white;
+            position: relative;
+        }
+
+        .player-list {
+            background-color: #0f0f0f;
+            padding: 20px;
+            max-height: 500px;
+            overflow-y: auto;
+            border-left: 1px solid #1e1e1e;
+        }
+
+        .players-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .player-card {
+            background-color: #1a1a1a;
+            padding: 12px;
+            border-radius: 8px;
+            border-left: 3px solid #0066d4;
+            font-size: 14px;
+        }
+
+        .player-card:hover {
+            background-color: #222222;
+        }
+
+        .player-card h4 {
+            color: #0066d4;
+            margin-bottom: 8px;
+            font-size: 15px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .player-info {
+            font-size: 13px;
+            line-height: 1.5;
+        }
+
+        .player-info strong {
+            color: #aaa;
+            font-weight: 500;
+            display: inline-block;
+            min-width: 70px;
+        }
+
+        .server-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin: 0 0 15px 0;
+            position: relative;
+            z-index: 2;
+        }
+
+        .server-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #121212;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        .server-title {
+            flex-grow: 1;
+            text-align: left;
+        }
+
+        .server-title h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 5px;
+            color: #fff;
+        }
+
+        .server-title .players-count {
+            display: inline-block;
+            background-color: #0066d4;
+            padding: 2px 8px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .server-meta {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 15px;
+        }
+
+        .meta-card {
+            background-color: #1a1a1a;
+            padding: 12px;
+            border-radius: 8px;
+            text-align: left;
+            border-left: 3px solid #0066d4;
+            font-size: 14px;
+        }
+
+        .meta-card h4 {
+            font-size: 13px;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+
+        .meta-card p {
+            font-size: 14px;
+            font-weight: 500;
+            color: #fff;
+        }
+
+        .server-description {
+            background-color: #1a1a1a;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            text-align: left;
+            font-size: 14px;
+        }
+
+        .server-description h4 {
+            font-size: 15px;
+            color: #aaa;
+            margin-bottom: 8px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .server-description h4 svg {
+            width: 16px;
+            height: 16px;
+            fill: #0066d4;
+        }
+
+        .server-description p {
+            font-size: 13px;
+            line-height: 1.5;
+            color: #ddd;
+        }
+
+        .server-owner {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            background-color: #1a1a1a;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 14px;
+        }
+
+        .owner-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+        }
+
+        .owner-info h4 {
+            font-size: 14px;
+            color: #aaa;
+            margin-bottom: 5px;
+        }
+
+        .owner-info p {
+            font-size: 13px;
+            color: #ddd;
+        }
+
+        .owner-info a {
+            color: #0066d4;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .owner-info a:hover {
+            text-decoration: underline;
+        }
+
+        .player-list h3 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .player-list h3::before {
+            content: "";
+            display: block;
+            width: 4px;
+            height: 18px;
+            background-color: #0066d4;
+            border-radius: 3px;
+        }
+
+        #captchaSection, #inviteSection {
+            background-color: #1a1a1a;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 15px auto;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+            border: 1px solid #252525;
+        }
+
+        #captchaSection h2, #inviteSection h2 {
+            font-size: 20px;
+            margin-bottom: 15px;
+            color: #fff;
+            font-weight: 600;
+        }
+
+        #captchaSection input, #inviteSection input {
+            padding: 10px 12px;
+            margin: 8px 0;
+            width: 100%;
+            border-radius: 6px;
+            border: none;
+            background-color: #252525;
+            color: #fff;
+            font-size: 15px;
+            border: 1px solid #333;
+        }
+
+        #captchaSection input:focus, #inviteSection input:focus {
+            outline: none;
+            border-color: #0066d4;
+            box-shadow: 0 0 0 2px rgba(0, 110, 212, 0.3);
+        }
+
+        .btn {
+            background: linear-gradient(135deg, #0066d4, #004fa3);
+            color: white;
+            border: none;
+            padding: 10px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            width: 100%;
+            font-size: 15px;
+            font-weight: 500;
+            margin-top: 12px;
+            transition: all 0.3s ease;
+        }
+
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(0, 110, 212, 0.3);
+        }
+
+        .hint {
+            font-size: 12px;
+            margin-top: 5px;
+            color: #777;
+            text-align: left;
+        }
+
+        footer {
+            background-color: #000000;
+            padding: 15px;
+            margin-top: auto;
+            border-top: 1px solid #1e1e1e;
+            flex-shrink: 0;
+        }
+
+        footer p {
+            color: #555;
+            font-size: 13px;
+        }
+
+        /* Scrollbar styling */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1a1a1a;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #0066d4;
+            border-radius: 3px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #0055b3;
+        }
+
+        .download-link {
+            display: block;
+            margin-top: 5px;
+            font-size: 11px;
+            color: #0066d4;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+        .download-link:hover {
+            text-decoration: underline;
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 900px) {
+            .server-info-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .player-list {
+                border-left: none;
+                border-top: 1px solid #1e1e1e;
+                max-height: 400px;
+            }
+            
+            .players-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            #captchaSection, #inviteSection {
+                width: 90%;
+            }
+        }
+
+        @media (max-width: 600px) {
+            nav {
+                padding: 12px 20px;
+            }
+            
+            .nav-left {
+                font-size: 18px;
+            }
+            
+            h1 {
+                font-size: 24px;
+            }
+            
+            .server-header {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 10px;
+            }
+            
+            .server-title {
+                width: 100%;
+            }
+            
+            .server-meta {
+                grid-template-columns: 1fr;
+            }
+            
+            .player-list {
+                max-height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-left">AlQulol is every where !!</div>
+        <div class="nav-right">
+            <button class="join-btn" onclick="window.location.href='https://alqulol.xyz';">Join ALqulol</button>
+        </div>
+    </nav>
+    <main>
+        <h1>FiveM malomaat Lookup</h1>
+        
+        <div id="captchaSection">
+            <h2>Enter CAPTCHA to Continue</h2>
+            <input type="text" id="captchaInput" placeholder="Enter 'alqulol'" onkeypress="handleCaptchaKeyPress(event)">
+            <p class="hint">Hint: Type 'alqulol' to continue </p>
+            <button class="btn" onclick="verifyCaptcha()">Submit</button>
+        </div>
+
+        <div id="inviteSection" style="display: none;">
+            <h2>Enter Server Invite Code or Link</h2>
+            <input type="text" id="inviteInput" placeholder="e.g. cfx.re/join/xxxxxxx" onkeypress="handleInviteKeyPress(event)">
+            <button class="btn" onclick="fetchServerInfo()">Submit</button>
+        </div>
+
+        <div id="serverSection" style="display: none;">
+            <div class="server-info-container">
+                <div class="server-details" id="serverInfo">
+                    <!-- Server details will be populated here -->
+                </div>
+                <div class="player-list" id="playerInfo">
+                    <!-- Player list will be populated here -->
+                </div>
+            </div>
+        </div>
+
+        <div id="notification" class="notification"></div>
+    </main>
+
+    <footer>
+        <p>alqulol baz ham inja ast</p>
+    </footer>
+
+    <script>
+        function verifyCaptcha() {
+            let input = document.getElementById("captchaInput").value;
+            if (input.toLowerCase() === "alqulol") {
+                document.getElementById("captchaSection").style.display = "none";
+                document.getElementById("inviteSection").style.display = "block";
+                document.getElementById("inviteInput").focus();
+            } else {
+                alert("Incorrect CAPTCHA. Try again.");
+            }
+        }
+
+        function handleCaptchaKeyPress(event) {
+            if (event.key === "Enter") {
+                verifyCaptcha();
+            }
+        }
+
+        function handleInviteKeyPress(event) {
+            if (event.key === "Enter") {
+                fetchServerInfo();
+            }
+        }
+
+        function showNotification(message) {
+            let notification = document.getElementById("notification");
+            notification.innerHTML = message;
+            notification.style.display = "block";
+            setTimeout(() => {
+                notification.style.display = "none";
+            }, 4000);
+        }
+
+        function downloadImage(url, filename) {
+            fetch(url)
+                .then(response => response.blob())
+                .then(blob => {
+                    const blobUrl = window.URL.createObjectURL(blob);
+                    const a = document.createElement('a');
+                    a.href = blobUrl;
+                    a.download = filename || 'download';
+                    document.body.appendChild(a);
+                    a.click();
+                    window.URL.revokeObjectURL(blobUrl);
+                    document.body.removeChild(a);
+                })
+                .catch(error => {
+                    console.error('Error downloading image:', error);
+                    showNotification('Failed to download image');
+                });
+        }
+
+        async function fetchServerInfo() {
+            let input = document.getElementById("inviteInput").value.trim();
+            let inviteCode = input.replace(/.*\/join\//, "");
+
+            if (!inviteCode) {
+                alert("Invalid server invite code or link. Try again.");
+                return;
+            }
+
+            document.getElementById("inviteSection").style.display = "none";
+            document.getElementById("serverSection").style.display = "block";
+            let serverInfoContainer = document.getElementById("serverInfo");
+            let playerInfoContainer = document.getElementById("playerInfo");
+            
+            serverInfoContainer.innerHTML = `
+                <div style="text-align: center; padding: 30px 0;">
+                    <div class="spinner"></div>
+                    <p>Fetching server details...</p>
+                </div>
+            `;
+            playerInfoContainer.innerHTML = "";
+
+            try {
+                let response = await fetch(`https://servers-frontend.fivem.net/api/servers/single/${inviteCode}`);
+                if (!response.ok) throw new Error("Failed to fetch server data");
+
+                let data = await response.json();
+                
+                // Server assets
+                const serverAvatar = `https://servers-live.fivem.net/servers/icon/${inviteCode}/${data.Data.iconVersion || '0'}.png`;
+                const ownerAvatar = `https://forum.cfx.re/user_avatar/forum.cfx.re/${data.Data.ownerName || 'admin07'}/128/3862890_2.png`;
+
+                // Server Details
+                serverInfoContainer.innerHTML = `
+                    <div class="server-header">
+                        <div>
+                            <img src="${serverAvatar}" class="server-avatar" alt="Server Avatar" onerror="this.src='https://servers-live.fivem.net/servers/icon/${inviteCode}/0.png'">
+                            <a class="download-link" onclick="downloadImage('${serverAvatar}', 'server-avatar-${inviteCode}.png')">Click to download</a>
+                        </div>
+                        <div class="server-title">
+                            <h3>${data.Data.hostname || 'Unknown Server'}</h3>
+                            <span class="players-count">${data.Data.clients || 0}/${data.Data.svMaxclients || 0} players</span>
+                        </div>
+                    </div>
+                    
+                    <div class="server-meta">
+                        <div class="meta-card">
+                            <h4>Server IP</h4>
+                            <p>${data.Data.connectEndPoints?.[0] || 'Not available'}</p>
+                        </div>
+                        <div class="meta-card">
+                            <h4>Server Version</h4>
+                            <p>FXServer v1.0.0.13686</p>
+                        </div>
+                        <div class="meta-card">
+                            <h4>Last Seen</h4>
+                            <p>${data.Data.lastSeen ? new Date(data.Data.lastSeen).toLocaleString() : 'Unknown'}</p>
+                        </div>
+                        <div class="meta-card">
+                            <h4>Support Status</h4>
+                            <p>${data.Data.support_status || 'Not specified'}</p>
+                        </div>
+                    </div>
+                    
+                    <div class="server-description">
+                        <h4>
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1 15h-2v-2h2v2zm0-4h-2V7h2v6z"/>
+                            </svg>
+                            Server Information
+                        </h4>
+                        <p>${data.Data.vars?.description || 'No description available for this server.'}</p>
+                    </div>
+                    
+                    <div class="server-owner">
+                        <div>
+                            <img src="${ownerAvatar}" class="owner-avatar" alt="Owner Avatar">
+                            <a class="download-link" onclick="downloadImage('${ownerAvatar}', 'owner-avatar-${data.Data.ownerName || 'unknown'}.png')">Click to download</a>
+                        </div>
+                        <div class="owner-info">
+                            <h4>Server Owner</h4>
+                            <p>${data.Data.ownerName || 'Unknown'} <a href="https://forum.cfx.re/u/${data.Data.ownerName || 'ADMIN07'}" target="_blank">(Profile)</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="server-description">
+                        <h4>
+                            <svg viewBox="0 0 24 24" width="24" height="24">
+                                <path d="M19 3h-4.18C14.4 1.84 13.3 1 12 1c-1.3 0-2.4.84-2.82 2H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm-7 0c.55 0 1 .45 1 1s-.45 1-1 1-1-.45-1-1 .45-1 1-1zm2 14H7v-2h7v2zm3-4H7v-2h10v2zm0-4H7V7h10v2z"/>
+                            </svg>
+                            Additional Details
+                        </h4>
+                        <p>
+                            <strong>Discord:</strong> ${data.Data.discord ? `<a href="${data.Data.discord}" target="_blank">Join Server</a>` : 'Not provided'}<br>
+                            <strong>Website:</strong> ${data.Data.vars?.website ? `<a href="${data.Data.vars.website}" target="_blank">Visit</a>` : 'Not provided'}
+                        </p>
+                    </div>
+                `;
+
+                // Player List in two columns
+                if (data.Data.players && data.Data.players.length > 0) {
+                    let playersHTML = `
+                        <h3>Player List (${data.Data.clients}/${data.Data.svMaxclients})</h3>
+                        <div class="players-grid">
+                    `;
+                    
+                    data.Data.players.forEach(player => {
+                        playersHTML += `
+                            <div class="player-card">
+                                <h4>${player.name || 'Unknown Player'}</h4>
+                                <div class="player-info">
+                                    <strong>Steam ID:</strong> ${player.identifiers?.find(id => id.startsWith('steam:')) 
+                                        ? player.identifiers.find(id => id.startsWith('steam:')) 
+                                        : '<span class="blurred" onclick="showNotification(\'You are not an alqulol member. Verify your Ip in our bot in our discord server to continue  zoor nabizan .\')">something good</span>'}<br>
+                                    <strong>Discord ID:</strong> ${player.identifiers?.find(id => id.startsWith('discord:')) 
+                                        ? player.identifiers.find(id => id.startsWith('discord:')) 
+                                        : '<span class="blurred" onclick="showNotification(\'You are not an alqulol member. Verify your Ip in our bot in our discord server to continue  zoor nabizan.\')">something good</span>'}<br>
+                                    <strong>License ID:</strong> ${player.identifiers?.find(id => id.startsWith('license:')) 
+                                        ? player.identifiers.find(id => id.startsWith('license:')) 
+                                        : '<span class="blurred" onclick="showNotification(\'You are not an alqulol member. Verify your Ip in our bot in our discord server to continue  zoor nabizan.\')">something good</span>'}<br>
+                                    <strong>IP:</strong> ${player.ip 
+                                        ? player.ip 
+                                        : '<span class="blurred" onclick="showNotification(\'You are not an alqulol member. Verify your Ip in our bot in our discord server to continue  zoor nabizan.\')">something good</span>'}
+                                </div>
+                            </div>
+                        `;
+                    });
+                    
+                    playersHTML += `</div>`;
+                    playerInfoContainer.innerHTML = playersHTML;
+                } else {
+                    playerInfoContainer.innerHTML = `
+                        <h3>Player List (0/${data.Data.svMaxclients || 0})</h3>
+                        <p style="text-align: center; padding: 15px 0; color: #777;">No players currently online</p>
+                    `;
+                }
+            } catch (error) {
+                serverInfoContainer.innerHTML = `
+                    <div style="text-align: center; padding: 30px 0; color: #ff6b6b;">
+                        <h3>Error retrieving server info</h3>
+                        <p>${error.message}</p>
+                        <button class="btn" onclick="document.getElementById('inviteSection').style.display='block'; document.getElementById('serverSection').style.display='none'" style="margin-top: 15px;">
+                            Try Again
+                        </button>
+                    </div>
+                `;
+                console.error(error);
+            }
+        }
+    </script>
+</body>
+</html>
